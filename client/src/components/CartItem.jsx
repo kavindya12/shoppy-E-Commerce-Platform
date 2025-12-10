@@ -2,16 +2,19 @@ import React from 'react';
 import { useStore } from '../store/store';
 import api from '../services/api';
 import { formatPrice } from '../utils/currency';
+import { useToast } from './Toast';
 
 const CartItem = ({ item }) => {
-  const { dispatch } = useStore();
+  const { dispatch, state } = useStore();
+  const { showToast } = useToast();
 
   const handleRemove = async () => {
     try {
       await api.delete(`/cart/${item._id}`);
       dispatch({ type: 'REMOVE_FROM_CART', payload: item._id });
+      showToast('Removed item from cart', 'success');
     } catch (error) {
-      console.error('Failed to remove item:', error);
+      showToast('Failed to remove item from cart', 'error');
     }
   };
 
@@ -21,10 +24,11 @@ const CartItem = ({ item }) => {
       // Update quantity logic here
       dispatch({
         type: 'UPDATE_CART_ITEM',
-        payload: { id: item._id, quantity: newQuantity },
+        payload: { id: item._id, quantity: newQuantity }
       });
+      showToast('Updated item quantity', 'success');
     } catch (error) {
-      console.error('Failed to update quantity:', error);
+      showToast('Failed to update quantity', 'error');
     }
   };
 

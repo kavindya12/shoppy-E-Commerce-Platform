@@ -13,30 +13,33 @@ import Orders from './pages/Orders';
 import AdminDashboard from './pages/AdminDashboard';
 import WishlistPage from './pages/Wishlist';
 import { StoreProvider } from './store/store';
+import { ToastProvider } from './components/Toast';
 
 function App() {
   return (
     <StoreProvider>
-      <Router>
-        <div className="flex flex-col min-h-screen">
-          <Header />
-          <main className="flex-1">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/products" element={<Products />} />
-              <Route path="/products/:id" element={<ProductDetails />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/orders" element={<Orders />} />
-              <Route path="/admin" element={<AdminDashboard />} />
-              <Route path="/wishlist" element={<WishlistPage />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-      </Router>
+      <ToastProvider>
+        <Router>
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-1">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/products" element={<Products />} />
+                <Route path="/products/:id" element={<ProductDetails />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/orders" element={<Orders />} />
+                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/wishlist" element={<WishlistPage />} />
+              </Routes>
+            </main>
+            <Footer />
+          </div>
+        </Router>
+      </ToastProvider>
     </StoreProvider>
   );
 }

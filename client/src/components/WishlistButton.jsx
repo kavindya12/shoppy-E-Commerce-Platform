@@ -1,20 +1,31 @@
 import React from 'react';
 import { useStore } from '../store/store';
 import api from '../services/api';
+import { useToast } from './Toast';
 
 const WishlistButton = ({ product }) => {
   const { state, dispatch } = useStore();
+  const { showToast } = useToast();
   const isInWishlist = state.wishlist.some(item => item._id === product._id);
 
   const handleWishlist = async e => {
     e.preventDefault();
-    if (!state.user) return alert('Login to use wishlist');
-    if (isInWishlist) {
-      await api.delete(`/wishlist/${product._id}`);
-      dispatch({ type: 'REMOVE_FROM_WISHLIST', payload: product._id });
-    } else {
-      const res = await api.post(`/wishlist/${product._id}`);
-      dispatch({ type: 'SET_WISHLIST', payload: res.data });
+    if (!state.user) {
+      showToast('Login to use wishlist', 'error');
+      return;
+    }
+    try {
+      if (isInWishlist) {
+        await api.delete(`/wishlist/${product._id}`);
+        dispatch({ type: 'REMOVE_FROM_WISHLIST', payload: product._id });
+        showToast('Removed from wishlist', 'success');
+      } else {
+        const res = await api.post(`/wishlist/${product._id}`);
+        dispatch({ type: 'SET_WISHLIST', payload: res.data });
+        showToast('Added to wishlist', 'success');
+      }
+    } catch (error) {
+      showToast('Failed to update wishlist', 'error');
     }
   };
 

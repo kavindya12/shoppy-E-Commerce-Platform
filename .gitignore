@@ -9,8 +9,10 @@ server/node_modules/
 .env.development.local
 .env.test.local
 .env.production.local
+.env.example
 client/.env
 server/.env
+server/.env.example
 
 # Build outputs
 dist/

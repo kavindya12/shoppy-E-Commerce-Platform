@@ -1,4 +1,4 @@
-# 🛒 Shoopy — MERN E-Commerce Platform
+# 🛒 Shoppy — MERN E-Commerce Platform
 
 [![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE) [![Node.js](https://img.shields.io/badge/Node-18.x-green)](https://nodejs.org/) [![React](https://img.shields.io/badge/React-18.x-blue)](https://react.dev/)
 
@@ -175,4 +175,4 @@ Pull requests are welcome! Follow conventional commits & proper PR descriptions.
 ---
 
 ## 📄 License
-MIT License.#
+MIT License.
